@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Api app"""
 from os import getenv
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, jsonify
 from models import storage
 from api.v1.views import app_views
 
@@ -13,6 +13,13 @@ app.register_blueprint(app_views)
 def handle_context(code):
     """ method to handle context and call close"""
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """ method to handle error 404"""
+    return jsonify({'error': 'Not found'})
+
 
 if __name__ == "__main__":
 
