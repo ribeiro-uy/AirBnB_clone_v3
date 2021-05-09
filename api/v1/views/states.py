@@ -25,7 +25,7 @@ def getMethod(state_id=None):
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
-		strict_slashes=False)
+                 strict_slashes=False)
 def deleteMethod(state_id):
     """delete method def"""
 
@@ -67,4 +67,4 @@ def putMethod(state_id):
         newState.save()
         return (jsonify(newState.to_dict()), 201)
     else:
-        abort(404) 
+        abort(404)
