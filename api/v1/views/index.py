@@ -11,7 +11,7 @@ from models.state import State
 from models.user import User
 
 
-@app_views.route("/status")
+@app_views.route('/status', strict_slashes=False)
 def status_url():
     """ method that returns a status JSON """
     return jsonify({"status": "OK"})
