@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """new view for State objects that handles all default RestFul API actions"""
 from api.v1.views import app_views
-from flask import Flask, Blueprint, jsonify, abort
+from flask import Flask, Blueprint, jsonify, abort, request
 from models import storage
 from models.state import State
 
@@ -23,7 +23,9 @@ def getMethod(state_id=None):
             states.append(state.to_dict())
         return jsonify(states)
 
-@app_views.route('/states/<state_id>', methods=['DELETE'])
+
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+		strict_slashes=False)
 def deleteMethod(state_id):
     """delete method def"""
 
@@ -34,6 +36,7 @@ def deleteMethod(state_id):
         return jsonify({})
     else:
         abort(404)
+
 
 @app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def postMethod():
@@ -64,4 +67,4 @@ def putMethod(state_id):
         newState.save()
         return (jsonify(newState.to_dict()), 201)
     else:
-        abort(404)        
+        abort(404) 
