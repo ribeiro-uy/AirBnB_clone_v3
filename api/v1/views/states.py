@@ -34,4 +34,34 @@ def deleteMethod(state_id):
         return jsonify({})
     else:
         abort(404)
-        
+
+@app_views.route('/states/', methods=['POST'], strict_slashes=False)
+def postMethod():
+    """Defines post method"""
+
+    if not request.get_json():
+        abort(400, 'Not a JSON')
+    if 'name' not in request.get_json():
+        abort(400, 'Missing name')
+    newState = State(**request.get_json())
+    newState.save()
+    return (jsonify(newState.to_dict()), 201)
+
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def putMethod(state_id):
+    """Defines put method"""
+
+    if not request.get_json():
+        abort(400, 'Not a JSON')
+    objName = "State." + state_id
+    if (objName in storage.all()):
+        newState = storage.get(State, state_id)
+        changeState = request.get_json()
+        for key, value in changeState.items():
+            if (key == 'name'):
+                setattr(newState, key, value)
+        newState.save()
+        return (jsonify(newState.to_dict()), 201)
+    else:
+        abort(404)        
