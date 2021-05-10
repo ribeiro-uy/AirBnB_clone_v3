@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""New view for Cities objects that handles all default RestFul API actions"""
+"""New view for Cities objects that handles all default RestFul API actions."""
 
 from api.v1.views import app_views
 from flask import Flask, Blueprint, jsonify, abort, request
@@ -10,7 +10,7 @@ from models.state import State
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
 def getCity(city_id=None):
-    """Defines get method 1"""
+    """Defines get method 1."""
     objName = "City." + city_id
     if (objName in storage.all()):
         return jsonify((storage.get(City, city_id)).to_dict())
@@ -21,7 +21,7 @@ def getCity(city_id=None):
 @app_views.route('/states/<state_id>/cities', methods=['GET'],
                  strict_slashes=False)
 def getCity2(state_id=None):
-    """defines get method 2"""
+    """defines get method 2."""
     if (("State." + state_id) in storage.all()):
         cities = []
         for city in storage.all("City").values():
@@ -34,7 +34,7 @@ def getCity2(state_id=None):
 @app_views.route('/cities/<city_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleteCity(city_id):
-    """Defines delete method"""
+    """Defines delete method."""
 
     objName = "City." + city_id
     if objName in storage.all():
@@ -48,7 +48,7 @@ def deleteCity(city_id):
 @app_views.route('/states/<state_id>/cities', methods=['POST'],
                  strict_slashes=False)
 def postCity(state_id=None):
-    """Defines post method"""
+    """Defines post method."""
     state = storage.get(State, state_id)
     if state is not None:
         if not request.get_json():
@@ -65,13 +65,13 @@ def postCity(state_id=None):
 @app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
 def putCity(city_id=None):
-    """Defines put method"""
+    """Defines put method."""
 
     city = storage.get(City, city_id)
     if city is not None:
         testing = request.get_json()
-        if testing is None
-        abort(400, 'Not a JSON')
+        if testing is None:
+            abort(400, 'Not a JSON')
         for key, value in testing.items():
             setattr(city, key, value)
         city.save()
