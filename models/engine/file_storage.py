@@ -70,9 +70,7 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        spl = str(cls).split(".")
-        spl2 = spl[2].split("'")
-        obj = spl2[0] + "." + id
+        obj = cls.__name__ + '.' + id
         if obj in self.all():
             return self.all().get(obj)
         else:
