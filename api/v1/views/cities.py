@@ -69,9 +69,9 @@ def putCity(city_id=None):
 
     city = storage.get(City, city_id)
     if city is not None:
-	testing = request.get_json()
+        testing = request.get_json()
         if testing is None
-	abort(400, 'Not a JSON')
+        abort(400, 'Not a JSON')
         for key, value in testing.items():
             setattr(city, key, value)
         city.save()
