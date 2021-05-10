@@ -54,12 +54,11 @@ def postCity(state_id=None):
         abort(400, 'Not a JSON')
     if 'name' not in request.get_json():
         abort(400, 'Missing name')
-    if storage.get(State, state_id) is None:
-        abort(404)
     request.get_json()['state_id'] = state_id
     newCity = City(**request.get_json())
     newCity.save()
     return (jsonify(newCity.to_dict()), 201)
+
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
