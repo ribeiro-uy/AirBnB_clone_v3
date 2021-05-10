@@ -58,6 +58,8 @@ def postCity(state_id=None):
     newCity = City(**request.get_json())
     newCity.save()
     return jsonify(newCity.to_dict()), 201
+    else:
+        abort(404)
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
