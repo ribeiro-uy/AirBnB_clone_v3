@@ -14,7 +14,7 @@ def getCity(city_id=None):
     objName = storage.get(City, city_id)
     if objName is not None:
         return jsonify(objName.to_dict())
-        abort(404)
+    abort(404)
 
 
 @app_views.route('/states/<state_id>/cities', methods=['GET'],
