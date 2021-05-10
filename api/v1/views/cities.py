@@ -11,10 +11,9 @@ from models.state import State
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
 def getCity(city_id=None):
     """Defines get method 1."""
-    objName = "City." + city_id
-    if (objName in storage.all()):
-        return jsonify((storage.get(City, city_id)).to_dict())
-    else:
+    objName = storage.get(City, city_id)
+    if objName is not None:
+        return jsonify(city.to_dict())
         abort(404)
 
 
