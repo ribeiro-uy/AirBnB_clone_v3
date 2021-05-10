@@ -51,20 +51,18 @@ def postMethod():
     return (jsonify(newState.to_dict()), 201)
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
-def putMethod(state_id):
+@app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
+def putMethod(city_id=None):
     """Defines put method"""
-
-    if not request.get_json():
-        abort(400, 'Not a JSON')
-    objName = "State." + state_id
-    if (objName in storage.all()):
-        newState = storage.get(State, state_id)
-        changeState = request.get_json()
-        for key, value in changeState.items():
-            if (key == 'name'):
-                setattr(newState, key, value)
-        newState.save()
-        return (jsonify(newState.to_dict()), 200)
+	
+    city = storage.get(City, city_id)
+    if city is not None:    
+    testing = request.get_json()
+            if testing is None:
+                abort(400, 'Not a JSON')
+            for key, value in testing.items():
+                setattr(city, key, value)
+            city.save()
+            return jsonify(city.to_dict()), 200
     else:
         abort(404)
