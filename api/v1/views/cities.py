@@ -40,7 +40,7 @@ def deleteCity(city_id):
     if objName in storage.all():
         storage.get(City, city_id).delete()
         storage.save()
-        return jsonify({})
+        return jsonify({}), 200
     else:
         abort(404)
 
