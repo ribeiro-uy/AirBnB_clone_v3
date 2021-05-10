@@ -13,7 +13,7 @@ def getCity(city_id=None):
     """Defines get method 1."""
     objName = storage.get(City, city_id)
     if objName is not None:
-        return jsonify(city.to_dict())
+        return jsonify(objName.to_dict())
         abort(404)
 
 
