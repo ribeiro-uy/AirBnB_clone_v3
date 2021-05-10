@@ -21,14 +21,15 @@ def getCity(city_id=None):
                  strict_slashes=False)
 def getCity2(state_id):
     """defines get method 2."""
-    city2 = storage.get(State, state_id)
-    if city2 is not None:
-        city_list = city2.cities
-        new_list = []
-        for city in city_list:
-            new_list.append(city.to_dict())
-        return jsonify(new_list)
-    abort(404)
+    if (("State." + state_id) in storage.all()):
+        cities = []
+        for city in storage.all("City").values():
+            if (city.state_id == state_id):
+                print(city)
+                cities.append(city.to_dict())
+            return jsonify(cities)
+    else:
+        abort(404)
 
 
 @app_views.route('/cities/<city_id>', methods=['DELETE'],
