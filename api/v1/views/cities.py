@@ -64,19 +64,17 @@ def postCity(state_id=None):
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
-def putCity(city_id):
+def putCity(city_id=None):
     """Defines put method"""
 
-    if not request.get_json():
-        abort(400, 'Not a JSON')
-    objName = "City." + city_id
-    if (objName in storage.all()):
-        newCity = storage.get(City, city_id)
-        changeCity = request.get_json()
-        for key, value in changeCity.items():
-            if key not in ['id', 'state_id', 'created_at', 'updated_at']:
-                setattr(newCity, key, value)
-        newCity.save()
-        return (jsonify(newCity.to_dict()), 200)
+    city = storage.get(City, city_id)
+    if city is not None:
+	testing = request.get_json()
+        if testing is None
+	abort(400, 'Not a JSON')
+        for key, value in testing.items():
+            setattr(city, key, value)
+        city.save()
+        return jsonify(city.to_dict()), 200
     else:
         abort(404)
