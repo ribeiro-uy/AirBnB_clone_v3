@@ -57,11 +57,11 @@ def postCity(state_id=None):
     request.get_json()['state_id'] = state_id
     newCity = City(**request.get_json())
     newCity.save()
-    return (jsonify(newCity.to_dict()), 201)
+    return jsonify(newCity.to_dict()), 201
 
 
-
-@app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/cities/<city_id>', methods=['PUT'],
+                 strict_slashes=False)
 def putCity(city_id):
     """Defines put method"""
 
