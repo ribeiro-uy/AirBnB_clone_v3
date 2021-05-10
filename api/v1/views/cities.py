@@ -49,17 +49,17 @@ def deleteCity(city_id):
                  strict_slashes=False)
 def postCity(state_id=None):
     """Defines post method"""
-
-    if not request.get_json():
-        abort(400, 'Not a JSON')
-    if 'name' not in request.get_json():
-        abort(400, 'Missing name')
-    request.get_json()['state_id'] = state_id
-    newCity = City(**request.get_json())
-    newCity.save()
-    return jsonify(newCity.to_dict()), 201
-    else:
-        abort(404)
+    state = storage.get(State, state_id)
+    if state is not None:
+        if not request.get_json():
+            abort(400, 'Not a JSON')
+        if 'name' not in request.get_json():
+            abort(400, 'Missing name')
+        request.get_json()['state_id'] = state_id
+        newCity = City(**request.get_json())
+        newCity.save()
+        return jsonify(newCity.to_dict()), 201
+    abort(404)
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
