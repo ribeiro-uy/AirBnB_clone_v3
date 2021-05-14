@@ -161,8 +161,12 @@ Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twit
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
 
 Version 3:
-Carlos Araque  -[Github](https://github.com/carlosaraque22) / [Twitter](https://twitter.com/alexa_orrico)
-Roberto Ribeiro -[Github](https://github.com/ribeiro-uy) / [Twitter](https://twitter.com/alexa_orrico)
+Carlos Araque  -[Github](https://github.com/carlosaraque22)
+Roberto Ribeiro -[Github](https://github.com/ribeiro-uy)
+
+Version 4:
+Pedro Arbilla - [Github](https://github.com/parbilla)
+Roberto Ribeiro -[Github](https://github.com/ribeiro-uy)
 
 Second part of Airbnb: Joann Vuong
 ## License
